@@ -5,7 +5,7 @@ import { Statistics } from './Statistics/Statistics';
 import { Section } from './Section';
 import { Notification } from './Notification';
 
-// import { getValue } from '@testing-library/user-event/dist/utils';
+import PropTypes from 'prop-types';
 
 export class App extends Component {
   state = {
@@ -28,10 +28,9 @@ export class App extends Component {
   };
 
   countPositiveFeedbackPercentage = () => {
-   
     const { good, neutral, bad } = this.state;
     const total = good + neutral + bad;
-    return ((good / total) * 100);
+    return (good / total) * 100;
   };
 
   render() {
@@ -45,21 +44,27 @@ export class App extends Component {
         </Section>
 
         <Section title={'Statistics'}>
-         
-        <Notification total={this.countTotalFeedback()}></Notification>
+          <Notification total={this.countTotalFeedback()}></Notification>
 
-        <Statistics
+          <Statistics
             good={this.state.good}
             neutral={this.state.neutral}
             bad={this.state.bad}
             total={this.countTotalFeedback()}
             positivePercentage={this.countPositiveFeedbackPercentage()}
           ></Statistics>
-
-
-          
         </Section>
       </AppStyle>
     );
   }
 }
+
+App.propType = {
+  title: PropTypes.string,
+  onLeaveFeedback: PropTypes.func,
+  good: PropTypes.number,
+  neutral: PropTypes.number,
+  bad: PropTypes.number,
+  countTotalFeedback: PropTypes.func,
+  countPositiveFeedbackPercentage: PropTypes.func,
+};

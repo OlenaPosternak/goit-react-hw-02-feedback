@@ -1,4 +1,6 @@
 import { Button, Container, List } from './FeedbackOptions.styled';
+import PropTypes from 'prop-types';
+
 export const FeedbackOptions = ({ onLeaveFeedback, options }) => {
   return (
     <Container>
@@ -12,4 +14,14 @@ export const FeedbackOptions = ({ onLeaveFeedback, options }) => {
       ;
     </Container>
   );
+};
+
+FeedbackOptions.propTypes = {
+  onLeaveFeedback: PropTypes.func,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      option: PropTypes.string,
+    })
+  ),
 };
